@@ -1,0 +1,10 @@
+[Unit]
+Description=Web server providing interface to linuxcnc via web sockets
+After=PocketNC.service
+
+[Service]
+ExecStart=/home/pocketnc/pocketnc/startRockhopper.sh
+ExecStop=/home/pocketnc/pocketnc/stopRockhopper.sh
+
+[Install]
+WantedBy=multi-user.target

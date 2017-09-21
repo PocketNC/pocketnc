@@ -1,0 +1,9 @@
+[Unit]
+Description=PocketNC Service
+
+[Service]
+ExecStart=/home/pocketnc/pocketnc/startPocketNC.sh
+User=pocketnc
+
+[Install]
+WantedBy=multi-user.target

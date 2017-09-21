@@ -1,3 +1,2 @@
 #!/bin/bash
-
-/usr/bin/PocketNC
+linuxcnc /home/pocketnc/pocketnc/Settings/PocketNC.ini
