@@ -3,6 +3,7 @@ Description=PocketNC Service
 
 [Service]
 ExecStart=/home/pocketnc/pocketnc/startPocketNC.sh
+ExecStop=/home/pocketnc/pocketnc/stopPocketNC.sh
 User=pocketnc
 
 [Install]
