@@ -7,7 +7,24 @@ controlling the Pocket NC v2.
 
 ## Setup a BeagleBone Black for use in a Pocket NC v2
 
-### flash bbb with latest machinekit image
+### Flash BBB with latest MachineKit image
+
+  # with wget
+  wget https://rcn-ee.com/rootfs/bb.org/testing/2017-02-12/machinekit/bone-debian-8.7-machinekit-armhf-2017-02-12-4gb.img.xz
+
+  # with curl
+  curl -O https://rcn-ee.com/rootfs/bb.org/testing/2017-02-12/machinekit/bone-debian-8.7-machinekit-armhf-2017-02-12-4gb.img.xz
+
+  xzcat bone-debian-8.7-machinekit-armhf-2017-02-12-4gb.img.xz > bone-debian-8.7-machinekit-armhf-2017-02-12-4gb.img
+
+  # on linux /dev/sdX on Mac /dev/rdiskX (on Mac you can use diskutil list to find what X is, make sure you use diskutil unmountDisk /dev/diskX)
+  sudo dd bs=1m if=bone-debian-8.7-machinekit-armhf-2017-02-12-4gb.img of=/dev/<sdcard>
+
+Insert the SD card into the BBB and power it on over USB. Connect to the BBB and enable the flasher script on boot. Then reboot to flash the image.
+
+  ssh machinekit@192.168.7.2
+  sudo sed -i 's/^#cmdline=init=\/opt\/scripts\/tools\/eMMC\/init-eMMC-flasher-v3.sh$/cmdline=init=\/opt\/scripts\/tools\/eMMC\/init-eMMC-flasher-v3.sh/' /boot/uEnv.txt
+  sudo reboot
 
 ### Set up pocketnc user
 
@@ -15,25 +32,31 @@ We're going to change the machinekit user name to pocketnc by creating a tempora
 user, giving it sudo privileges, changing the machinekit user to pocketnc using the
 temporary user, then deleting the temporary user.
 
-    # may be 192.168.7.2, use username/password machinekit/machinekit
-    ssh machinekit@192.168.6.2 
+    # use username/password machinekit/machinekit
+    ssh machinekit@192.168.7.2 
     sudo adduser temporary
     sudo adduser temporary sudo
     exit
 
-    ssh temporary@192.168.6.2
+    ssh temporary@192.168.7.2
 
     # The next command will error if there are any processes running owned by the machinekit user. 
-    # It will list the process id. Run `kill <process id>` for every process until the following command goes through.
+    # It will list the process id. Run `sudo kill <process id>` for every process until the following command goes through.
     sudo usermod -l pocketnc machinekit
     sudo usermod -d /home/pocketnc -m pocketnc
     exit
 
     # password should still be machinekit
-    ssh pocketnc@192.168.6.2
+    ssh pocketnc@192.168.7.2
 
     # change password to pocketnc (or whatever you like)
     passwd
+
+    # Setup no password for sudo
+    # on the last line change machinekit to pocketnc
+    # it should look like (no #):
+    # pocketnc ALL=NOPASSWD: ALL
+    sudo visudo
 
     sudo deluser temporary
     sudo rm -r /home/temporary
@@ -47,7 +70,7 @@ Set it to something like:
    
     Debian GNU/Linux 8
 
-    Pocket NC Image (based on MachineKit 4.14 image 11/19/2017)
+    Pocket NC Image (based on Machinekit Debian Image 2017-02-12)
 
     Support/FAQ: http://www.pocketnc.com/faq
 
@@ -63,18 +86,25 @@ Set it to something like:
     # Change hostname from beaglebone to pocketnc
     sudo sed -i 's/beaglebone/pocketnc/g' /etc/hosts
     sudo sed -i 's/beaglebone/pocketnc/g' /etc/hostname
-    sudo reboot
 
-### Other Setup
+### Disable graphical boot
 
     # disable lightdm (the windowing system)
     sudo systemctl disable lightdm
 
-### Update the kernel
+### Disable Apache
 
-    cd /opt/scripts/tools/
-    sudo ./update_kernel.sh --bone-rt-channel --lts-4_14
+    sudo systemctl disable apache2
+    sudo systemctl stop apache2
+
+### Reboot (make sure ethernet is plugged in)
+
     sudo reboot
+
+### Update apt-get
+
+    sudo apt-get update
+    sudo apt-get upgrade
 
 ### Install dependencies for Rockhopper
 
@@ -90,7 +120,18 @@ Set it to something like:
     sudo ./enableServices.sh
     ./postUpdate.sh
 
+    mkdir ~/ncfiles
+
+    sudo reboot
+
+## Might need these steps when upgrading to kernel 4.14.x
+
+### Update the kernel
+
+    cd /opt/scripts/tools/
+    sudo ./update_kernel.sh --bone-rt-channel --lts-4_14
+    sudo reboot
+
 ### Enable uBoot overlay
 
     sudo sed -i 's/^#uboot_overlay_addr0=\/lib\/firmware\/<file0>.dtbo$/uboot_overlay_addr0=\/lib\/firmware\/PocketNCdriver-00A0.dtbo/' /boot/uEnv.txt
-    sudo sed -i 's/^#uboot_overlay_addr1=\/lib\/firmware\/<file1>.dtbo$/uboot_overlay_addr1=\/lib\/firmware\/BB-ADC-00A0.dtbo/' /boot/uEnv.txt
