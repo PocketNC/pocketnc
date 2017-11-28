@@ -9,22 +9,22 @@ controlling the Pocket NC v2.
 
 ### Flash BBB with latest MachineKit image
 
-  # with wget
-  wget https://rcn-ee.com/rootfs/bb.org/testing/2017-02-12/machinekit/bone-debian-8.7-machinekit-armhf-2017-02-12-4gb.img.xz
+    # with wget
+    wget https://rcn-ee.com/rootfs/bb.org/testing/2017-02-12/machinekit/bone-debian-8.7-machinekit-armhf-2017-02-12-4gb.img.xz
 
-  # with curl
-  curl -O https://rcn-ee.com/rootfs/bb.org/testing/2017-02-12/machinekit/bone-debian-8.7-machinekit-armhf-2017-02-12-4gb.img.xz
+    # with curl
+    curl -O https://rcn-ee.com/rootfs/bb.org/testing/2017-02-12/machinekit/bone-debian-8.7-machinekit-armhf-2017-02-12-4gb.img.xz
 
-  xzcat bone-debian-8.7-machinekit-armhf-2017-02-12-4gb.img.xz > bone-debian-8.7-machinekit-armhf-2017-02-12-4gb.img
+    xzcat bone-debian-8.7-machinekit-armhf-2017-02-12-4gb.img.xz > bone-debian-8.7-machinekit-armhf-2017-02-12-4gb.img
 
-  # on linux /dev/sdX on Mac /dev/rdiskX (on Mac you can use diskutil list to find what X is, make sure you use diskutil unmountDisk /dev/diskX)
-  sudo dd bs=1m if=bone-debian-8.7-machinekit-armhf-2017-02-12-4gb.img of=/dev/<sdcard>
+    # on linux /dev/sdX on Mac /dev/rdiskX (on Mac you can use diskutil list to find what X is, make sure you use diskutil unmountDisk /dev/diskX)
+    sudo dd bs=1m if=bone-debian-8.7-machinekit-armhf-2017-02-12-4gb.img of=/dev/<sdcard>
 
 Insert the SD card into the BBB and power it on over USB. Connect to the BBB and enable the flasher script on boot. Then reboot to flash the image.
 
-  ssh machinekit@192.168.7.2
-  sudo sed -i 's/^#cmdline=init=\/opt\/scripts\/tools\/eMMC\/init-eMMC-flasher-v3.sh$/cmdline=init=\/opt\/scripts\/tools\/eMMC\/init-eMMC-flasher-v3.sh/' /boot/uEnv.txt
-  sudo reboot
+    ssh machinekit@192.168.7.2
+    sudo sed -i 's/^#cmdline=init=\/opt\/scripts\/tools\/eMMC\/init-eMMC-flasher-v3.sh$/cmdline=init=\/opt\/scripts\/tools\/eMMC\/init-eMMC-flasher-v3.sh/' /boot/uEnv.txt
+    sudo reboot
 
 ### Set up pocketnc user
 
