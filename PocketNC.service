@@ -1,5 +1,6 @@
 [Unit]
 Description=PocketNC Service
+After=sshd.service
 
 [Service]
 ExecStart=/home/pocketnc/pocketnc/startPocketNC.sh
