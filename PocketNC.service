@@ -1,6 +1,6 @@
 [Unit]
 Description=PocketNC Service
-After=sshd.service
+After=generic-board-startup.service
 
 [Service]
 ExecStart=/home/pocketnc/pocketnc/startPocketNC.sh
