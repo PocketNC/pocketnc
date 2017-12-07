@@ -64,10 +64,7 @@ temporary user, then deleting the temporary user.
 
 ### Change boot message
 
-    sudo vim /etc/issue.net
-
-Set it to something like:
-   
+    sudo sh -c "cat <<EOF > /etc/issue.net
     Debian GNU/Linux 8
 
     Pocket NC Image (based on Machinekit Debian Image 2017-02-12)
@@ -75,6 +72,9 @@ Set it to something like:
     Support/FAQ: http://www.pocketnc.com/faq
 
     default username:password is [pocketnc:pocketnc]
+    EOF"
+
+    sudo cp /etc/issue.net /etc/issue
 
 ### Set up DHCP on eth0
 
@@ -87,6 +87,15 @@ Set it to something like:
     sudo sed -i 's/beaglebone/pocketnc/g' /etc/hosts
     sudo sed -i 's/beaglebone/pocketnc/g' /etc/hostname
 
+### Reboot (make sure ethernet is plugged in)
+
+    sudo reboot
+
+### Update apt-get
+
+    sudo apt-get update
+    sudo apt-get upgrade
+
 ### Disable graphical boot
 
     # disable lightdm (the windowing system)
@@ -97,14 +106,6 @@ Set it to something like:
     sudo systemctl disable apache2
     sudo systemctl stop apache2
 
-### Reboot (make sure ethernet is plugged in)
-
-    sudo reboot
-
-### Update apt-get
-
-    sudo apt-get update
-    sudo apt-get upgrade
 
 ### Install dependencies for Rockhopper
 
