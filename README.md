@@ -136,3 +136,8 @@ temporary user, then deleting the temporary user.
 ### Enable uBoot overlay
 
     sudo sed -i 's/^#uboot_overlay_addr0=\/lib\/firmware\/<file0>.dtbo$/uboot_overlay_addr0=\/lib\/firmware\/PocketNCdriver-00A0.dtbo/' /boot/uEnv.txt
+
+### Disable HDMI Audio (P9.28 in use by Pocket NC)
+
+    sudo sed -i 's/^#disable_uboot_overlay_audio=1/disable_uboot_overlay_audio=1/' /boot/uEnv.txt
+
