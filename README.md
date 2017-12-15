@@ -10,19 +10,15 @@ controlling the Pocket NC v2.
 ### Flash BBB with latest MachineKit image
 
     # with wget
-    wget https://rcn-ee.com/rootfs/bb.org/testing/2017-02-12/machinekit/bone-debian-8.7-machinekit-armhf-2017-02-12-4gb.img.xz
+    wget https://rcn-ee.net/rootfs/bb.org/testing/2017-12-12/stretch-machinekit/bone-debian-9.3-machinekit-armhf-2017-12-12-4gb.img.xz
 
     # with curl
-    curl -O https://rcn-ee.com/rootfs/bb.org/testing/2017-02-12/machinekit/bone-debian-8.7-machinekit-armhf-2017-02-12-4gb.img.xz
+    curl -O https://rcn-ee.net/rootfs/bb.org/testing/2017-12-12/stretch-machinekit/bone-debian-9.3-machinekit-armhf-2017-12-12-4gb.img.xz
 
-    xzcat bone-debian-8.7-machinekit-armhf-2017-02-12-4gb.img.xz > bone-debian-8.7-machinekit-armhf-2017-02-12-4gb.img
-
-    # on linux /dev/sdX on Mac /dev/rdiskX (on Mac you can use diskutil list to find what X is, make sure you use diskutil unmountDisk /dev/diskX)
-    sudo dd bs=1m if=bone-debian-8.7-machinekit-armhf-2017-02-12-4gb.img of=/dev/<sdcard>
-
+Use [Etcher](https://etcher.io/) to flash image to SD Card.
 Insert the SD card into the BBB and power it on over USB. Connect to the BBB and enable the flasher script on boot. Then reboot to flash the image.
 
-    ssh machinekit@192.168.7.2
+    ssh machinekit@192.168.6.2 # 192.168.7.2 on Windows
     sudo sed -i 's/^#cmdline=init=\/opt\/scripts\/tools\/eMMC\/init-eMMC-flasher-v3.sh$/cmdline=init=\/opt\/scripts\/tools\/eMMC\/init-eMMC-flasher-v3.sh/' /boot/uEnv.txt
     sudo reboot
 
@@ -33,12 +29,12 @@ user, giving it sudo privileges, changing the machinekit user to pocketnc using 
 temporary user, then deleting the temporary user.
 
     # use username/password machinekit/machinekit
-    ssh machinekit@192.168.7.2 
+    ssh machinekit@192.168.6.2 # 192.168.7.2 on Windows
     sudo adduser temporary
     sudo adduser temporary sudo
     exit
 
-    ssh temporary@192.168.7.2
+    ssh temporary@192.168.6.2 # 192.168.7.2 on Windows
 
     # The next command will error if there are any processes running owned by the machinekit user. 
     # It will list the process id. Run `sudo kill <process id>` for every process until the following command goes through.
@@ -47,7 +43,7 @@ temporary user, then deleting the temporary user.
     exit
 
     # password should still be machinekit
-    ssh pocketnc@192.168.7.2
+    ssh pocketnc@192.168.6.2 # 192.168.7.2 on Windows
 
     # change password to pocketnc (or whatever you like)
     passwd
@@ -67,7 +63,7 @@ temporary user, then deleting the temporary user.
     sudo sh -c "cat <<EOF > /etc/issue.net
     Debian GNU/Linux 8
 
-    Pocket NC Image (based on Machinekit Debian Image 2017-02-12)
+    Pocket NC Image (based on https://rcn-ee.net/rootfs/bb.org/testing/2017-12-12/stretch-machinekit/bone-debian-9.3-machinekit-armhf-2017-12-12-4gb.img.xz)
 
     Support/FAQ: http://www.pocketnc.com/faq
 
@@ -106,13 +102,18 @@ temporary user, then deleting the temporary user.
     sudo systemctl disable apache2
     sudo systemctl stop apache2
 
-
 ### Install dependencies for Rockhopper
 
     sudo pip install tornado # currently 4.5.2
     sudo apt-get install graphviz graphviz-dev # 2.38.0-7
     sudo pip install pygraphviz --install-option="--include-path=/usr/include/graphviz/" --install-option="--library-path=/usr/lib/graphviz"
     sudo pip install netifaces
+
+### Set the kernel to 4.4
+
+    cd /opt/scripts/tools/
+    sudo ./update_kernel.sh --ti-rt-channel --lts-4_4
+    sudo reboot
 
 ### Clone this repository including submodules and run init scripts
 
@@ -123,16 +124,6 @@ temporary user, then deleting the temporary user.
 
     mkdir ~/ncfiles
 
-    sudo reboot
-
-## Might need these steps when upgrading to kernel 4.14.x
-
-### Update the kernel
-
-    cd /opt/scripts/tools/
-    sudo ./update_kernel.sh --bone-rt-channel --lts-4_14
-    sudo reboot
-
 ### Enable uBoot overlay
 
     sudo sed -i 's/^#uboot_overlay_addr0=\/lib\/firmware\/<file0>.dtbo$/uboot_overlay_addr0=\/lib\/firmware\/PocketNCdriver-00A0.dtbo/' /boot/uEnv.txt
@@ -141,3 +132,6 @@ temporary user, then deleting the temporary user.
 
     sudo sed -i 's/^#disable_uboot_overlay_audio=1/disable_uboot_overlay_audio=1/' /boot/uEnv.txt
 
+### Reboot
+
+    sudo reboot
