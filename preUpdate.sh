@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo "Nothing to do..."
+./applyOldOverlaySettings.py $1
