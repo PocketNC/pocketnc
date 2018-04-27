@@ -95,6 +95,7 @@ temporary user, then deleting the temporary user.
 
     # disable lightdm (the windowing system)
     sudo systemctl disable lightdm
+    sudo systemctl stop lightdm
 
 ### Disable Apache
 
@@ -111,7 +112,7 @@ temporary user, then deleting the temporary user.
 
 ### Clone this repository including submodules and run init scripts
 
-    git clone --recursive https://github.com/PocketNC/pocketnc.git
+    git clone -b latestMachineKitTest --recursive https://github.com/PocketNC/pocketnc.git
     cd pocketnc
     sudo ./enableServices.sh
     ./postUpdate.sh

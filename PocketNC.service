@@ -3,6 +3,7 @@ Description=PocketNC Service
 After=generic-board-startup.service
 
 [Service]
+ExecStartPre=/bin/sleep 10
 ExecStart=/home/pocketnc/pocketnc/startPocketNC.sh
 ExecStop=/home/pocketnc/pocketnc/stopPocketNC.sh
 User=pocketnc
