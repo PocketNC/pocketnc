@@ -90,6 +90,7 @@ temporary user, then deleting the temporary user.
 
     sudo apt-get update
     sudo apt-get upgrade
+    sudo apt-get install machinekit # upgrade to latest machinekit
 
 ### Disable graphical boot
 
