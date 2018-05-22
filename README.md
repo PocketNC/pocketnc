@@ -76,11 +76,6 @@ temporary user, then deleting the temporary user.
 
     sudo cp /etc/issue.net /etc/issue
 
-### Set up DHCP on eth0
-
-    # Uncomment line #iface eth0 inet dhcp in /etc/network/interfaces
-    sudo sed -i 's/^#iface eth0 inet dhcp$/iface eth0 inet dhcp/' /etc/network/interfaces
-
 ### Update hostname
 
     # Change hostname from beaglebone to pocketnc
@@ -109,7 +104,7 @@ temporary user, then deleting the temporary user.
 
 ### Install dependencies for Rockhopper
 
-    sudo pip install tornado # currently 4.5.2
+    sudo pip install tornado==4.5.2
     sudo apt-get install graphviz graphviz-dev # 2.38.0-7
     sudo pip install pygraphviz --install-option="--include-path=/usr/include/graphviz/" --install-option="--library-path=/usr/lib/graphviz"
     sudo pip install netifaces
@@ -124,15 +119,3 @@ temporary user, then deleting the temporary user.
     mkdir ~/ncfiles
 
     sudo reboot
-
-## Might need these steps when upgrading to kernel 4.14.x
-
-### Update the kernel
-
-    cd /opt/scripts/tools/
-    sudo ./update_kernel.sh --bone-rt-channel --lts-4_14
-    sudo reboot
-
-### Enable uBoot overlay
-
-    sudo sed -i 's/^#uboot_overlay_addr0=\/lib\/firmware\/<file0>.dtbo$/uboot_overlay_addr0=\/lib\/firmware\/PocketNCdriver-00A0.dtbo/' /boot/uEnv.txt
