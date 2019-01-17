@@ -3,7 +3,15 @@
 ./copyDefaultFiles.py
 
 cd Settings
-sudo ./dtc.sh
+
+if [ -x ./dtc.sh ]; then
+  sudo ./dtc.sh
+fi
+
+if [ -x ./postUpdate ]; then
+  ./postUpdate
+fi
+
 cd ..
 
 sudo systemctl --system daemon-reload

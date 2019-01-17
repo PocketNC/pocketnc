@@ -10,6 +10,8 @@ fi
 
 export PATH=$PATH:/home/pocketnc/pocketnc/Settings
 
-/home/pocketnc/pocketnc/Settings/generateINI.py
+cd /home/pocketnc/pocketnc/Settings/
+
+./generateINI.py
 
 linuxcnc /home/pocketnc/pocketnc/Settings/PocketNC.ini
