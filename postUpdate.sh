@@ -2,6 +2,17 @@
 
 ./copyDefaultFiles.py
 
+# Check if swap space is being used
+if [ -f /my_swap ]; then
+  if grep --quiet /my_swap /etc/fstab; then
+    echo "Swap space already being allocated at boot"
+  else
+    sudo mkswap /my_swap
+    sudo swapon /my_swap
+    sudo su -c 'echo "/my_swap swap swap defaults 0 0" >> /etc/fstab'
+  fi
+fi
+
 cd Settings
 
 if [ -x ./dtc.sh ]; then
