@@ -6,6 +6,8 @@ After=PocketNC.service
 ExecStart=/home/pocketnc/pocketnc/startRockhopper.sh
 ExecStop=/home/pocketnc/pocketnc/stopRockhopper.sh
 User=pocketnc
+TimeoutStopSec=5
+KillMode=process
 
 [Install]
 WantedBy=multi-user.target

@@ -5,9 +5,11 @@ if [ -f /home/pocketnc/.pocketnc_env ]; then
 fi
 
 sleep 1
-while [ ! -f /home/pocketnc/pocketnc/Settings/PocketNC.ini ];
-do
-  echo "Waiting for PocketNC.ini file to be generated..."
+
+dummy_pid=$(pgrep dummy.sh)
+until [ -n "$dummy_pid" ]; do
+  echo "Waiting for dummy.sh before starting LinuxCNCWebSktSvr..."
+  dummy_pid=$(pgrep dummy.sh)
   sleep 1
 done
 
