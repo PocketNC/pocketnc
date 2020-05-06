@@ -6,6 +6,7 @@ After=generic-board-startup.service
 ExecStart=/home/pocketnc/pocketnc/startPocketNC.sh
 ExecStop=/home/pocketnc/pocketnc/stopPocketNC.sh
 User=pocketnc
+KillMode=process
 
 [Install]
 WantedBy=multi-user.target

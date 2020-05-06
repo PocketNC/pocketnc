@@ -3,10 +3,16 @@
 echo "Reloading services..."
 sudo systemctl --system daemon-reload
 
+echo "Killing Rockhopper..."
+sudo systemctl stop Rockhopper.service
+
 echo "Killing PocketNC..."
-/home/pocketnc/pocketnc/stopPocketNC.sh
+sudo systemctl stop PocketNC.service
+
+sleep 1
+
 echo "Starting PocketNC..."
 sudo systemctl start PocketNC.service
 
-echo "Restarting Rockhopper..."
-sudo systemctl restart Rockhopper.service
+echo "Starting Rockhopper..."
+sudo systemctl start Rockhopper.service
