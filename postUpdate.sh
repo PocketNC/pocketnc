@@ -13,6 +13,9 @@ if [ -f /my_swap ]; then
   fi
 fi
 
+./ensureTmpRemotesAdded.sh
+./ensurePublicKeysAdded.sh
+
 cd Settings
 
 if [ -x ./dtc.sh ]; then
