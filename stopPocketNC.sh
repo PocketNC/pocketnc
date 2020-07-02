@@ -5,11 +5,6 @@ pgrep -f "/home/pocketnc/pocketnc/Settings/dummy.sh" | while read -r pid ; do
   kill $pid
 done
 
-pgrep -f "linuxcnc /home/pocketnc/pocketnc/Settings/PocketNC.ini" | while read -r pid ; do
-  echo "Killing subprocess linuxcnc $pid"
-  kill $pid
-done
-
 halcmd -R
 
 linuxcnc_pids=$(pgrep linuxcnc)
