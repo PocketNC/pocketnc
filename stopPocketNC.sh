@@ -21,7 +21,7 @@ pgrep linuxcnc | while read -r pid ; do
   kill -9 $pid
 done
 
-grep hss_sensors | while read -r pid ; do
+pgrep hss_sensors | while read -r pid ; do
   echo "Timeout expired, force killing hss_sensors HAL component $pid"
   kill -9 $pid
 done
