@@ -13,4 +13,4 @@ until [ -n "$dummy_pid" ]; do
   sleep 1
 done
 
-python /home/pocketnc/pocketnc/Rockhopper/LinuxCNCWebSktSvr.py /home/pocketnc/pocketnc/Settings/PocketNC.ini
+linuxcnc-python /home/pocketnc/pocketnc/Rockhopper/LinuxCNCWebSktSvr.py /home/pocketnc/pocketnc/Settings/PocketNC.ini
