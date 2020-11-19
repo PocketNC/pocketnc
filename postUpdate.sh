@@ -16,12 +16,15 @@ fi
 ./ensureTmpRemotesAdded.sh
 ./ensurePublicKeysAdded.sh
 
+# Update /opt/scripts/boot to commit b61125c1485bee929340cacc06c85c6fcfd678bc
+# This commit changes the ethernet-over-usb protocol used with macOS from ECM
+# to NCM, because with v11 macOS no longer supports ECM
 cd /opt/scripts/boot
-
 sudo git fetch origin
 sudo git checkout b61125c1485bee929340cacc06c85c6fcfd678bc
 
-cd ~/pocketnc/Settings
+
+cd /home/pocketnc/pocketnc/Settings
 
 if [ -x ./dtc.sh ]; then
   sudo ./dtc.sh
