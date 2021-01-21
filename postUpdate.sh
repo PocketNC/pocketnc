@@ -23,6 +23,11 @@ cd /opt/scripts/boot
 sudo git fetch origin
 sudo git checkout b61125c1485bee929340cacc06c85c6fcfd678bc
 
+if ! dpkg -l | grep bb-usb-gadgets; then
+  sudo apt update
+  sudo apt install bb-usb-gadgets
+fi
+
 # Prevent shared memory from being cleaned up when pocketnc user closes SSH
 sudo sed -i 's/^#RemoveIPC=yes/RemoveIPC=no/' /etc/systemd/logind.conf
 
