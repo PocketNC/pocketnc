@@ -30,6 +30,8 @@ fi
 
 # Prevent shared memory from being cleaned up when pocketnc user closes SSH
 sudo sed -i 's/^#RemoveIPC=yes/RemoveIPC=no/' /etc/systemd/logind.conf
+# Remove line which is incorrectly setting usb0 as default gateway from /etc/network/interfaces 
+sudo sed -i 's/^\([^#]*gateway\)/#\1/g' /etc/network/interfaces
 
 
 cd /home/pocketnc/pocketnc/Settings
