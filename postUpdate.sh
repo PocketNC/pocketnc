@@ -16,17 +16,31 @@ fi
 ./ensureTmpRemotesAdded.sh
 ./ensurePublicKeysAdded.sh
 
-# Update /opt/scripts/boot to commit b61125c1485bee929340cacc06c85c6fcfd678bc
-# This commit changes the ethernet-over-usb protocol used with macOS from ECM
-# to NCM, because with v11 macOS no longer supports ECM
-cd /opt/scripts/boot
-sudo git fetch origin
-sudo git checkout b61125c1485bee929340cacc06c85c6fcfd678bc
+# Check for internet connection. 
+if ping -q -c 1 -W 1 github.com >/dev/null; then
+  # Update /opt/scripts/boot to commit b61125c1485bee929340cacc06c85c6fcfd678bc
+  # This commit changes the ethernet-over-usb protocol used with macOS from ECM
+  # to NCM, because with v11 macOS no longer supports ECM
+  cd /opt/scripts/boot
+  sudo git fetch origin
+  sudo git checkout b61125c1485bee929340cacc06c85c6fcfd678bc
 
-if ! dpkg -l | grep bb-usb-gadgets; then
-  sudo apt update
-  sudo apt install bb-usb-gadgets
+  if ! dpkg -l | grep bb-usb-gadgets; then
+    sudo apt update
+    sudo apt install bb-usb-gadgets
+  fi
+else #If no connection, assume update is occuring over USB
+  if [ -d /tmp/boot-scripts/ ]; then
+    cd /opt/scripts/boot
+    git remote add tmp /tmp/boot-scripts
+    sudo git fetch tmp
+    sudo git checkout b61125c1485bee929340cacc06c85c6fcfd678bc
+  fi
+  if [ -d /tmp/ ] && ! dpkg -l | grep bb-usb-gadgets; then
+    sudo dpkg -i /tmp/debs/bb-usb-gadgets_1.20200504.0-0~stretch+20200504_all.deb
+  fi
 fi
+
 
 # Prevent shared memory from being cleaned up when pocketnc user closes SSH
 sudo sed -i 's/^#RemoveIPC=yes/RemoveIPC=no/' /etc/systemd/logind.conf
