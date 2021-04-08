@@ -45,7 +45,16 @@ fi
 # Prevent shared memory from being cleaned up when pocketnc user closes SSH
 sudo sed -i 's/^#RemoveIPC=yes/RemoveIPC=no/' /etc/systemd/logind.conf
 # Remove line which is incorrectly setting usb0 as default gateway from /etc/network/interfaces 
-sudo sed -i 's/^\([^#]*gateway\)/#\1/g' /etc/network/interfaces
+# ONLY IF bb-usb-gadgets IS INSTALLED. 
+# We would rather have:
+# - usb tethering working, network gateway broken
+# than
+# - network gateway working, usb tethering broken
+if dpkg-query -s bb-usb-gadgets | grep "install ok installed"; then
+  sudo sed -i 's/^\([^#]*gateway\)/#\1/g' /etc/network/interfaces
+else
+  sudo sed -i '/gateway/s/#//g' /etc/network/interfaces
+fi
 
 
 cd /home/pocketnc/pocketnc/Settings
