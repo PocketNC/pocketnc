@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo /home/pocketnc/pocketnc/ensureBootloaderUpToDate.sh
+
 if [ -f /home/pocketnc/pocketnc/Settings/PocketNC.ini ];then
   rm /home/pocketnc/pocketnc/Settings/PocketNC.ini
 fi
