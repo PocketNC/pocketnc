@@ -6,7 +6,7 @@ import subprocess
 import re
 import pprint
 
-POCKETNC_DIRECTORY = "/home/pocketnc/pocketnc"
+POCKETNC_DIRECTORY = os.environ.get('POCKETNC_DIRECTORY')
 
 sys.path.insert(0, os.path.join(POCKETNC_DIRECTORY, "Rockhopper"));
 from ini import read_ini_data, merge_ini_data, write_ini_data, ini_differences, remove_ini_data

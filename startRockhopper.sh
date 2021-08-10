@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ -f /home/pocketnc/.pocketnc_env ]; then
-  source /home/pocketnc/.pocketnc_env
+if [ -f ${POCKETNC_DIRECTORY}../.pocketnc_env ]; then
+  source ${POCKETNC_DIRECTORY}../.pocketnc_env
 fi
 
 sleep 1
@@ -13,4 +13,4 @@ until [ -n "$dummy_pid" ]; do
   sleep 1
 done
 
-linuxcnc-python /home/pocketnc/pocketnc/Rockhopper/LinuxCNCWebSktSvr.py /home/pocketnc/pocketnc/Settings/PocketNC.ini
+linuxcnc-python ${POCKETNC_DIRECTORY}Rockhopper/LinuxCNCWebSktSvr.py ${POCKETNC_DIRECTORY}Settings/PocketNC.ini

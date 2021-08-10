@@ -4,7 +4,7 @@ import subprocess
 import os
 import shutil
 
-ROOT_DIRECTORY = "/home/pocketnc/pocketnc"
+ROOT_DIRECTORY = os.environ.get('POCKETNC_DIRECTORY')
 TOOL_TABLE_FILE = os.path.join(ROOT_DIRECTORY, "Settings/tool.tbl")
 TOOL_TABLE_DEFAULT_FILE = os.path.join(ROOT_DIRECTORY, "Settings/tool.tbl.default")
 

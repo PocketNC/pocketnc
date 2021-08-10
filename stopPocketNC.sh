@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pgrep -f "/home/pocketnc/pocketnc/Settings/dummy.sh" | while read -r pid ; do
+pgrep -f "${POCKETNC_DIRECTORY}Settings/dummy.sh" | while read -r pid ; do
   echo "Killing subprocess dummy.sh $pid"
   kill $pid
 done
