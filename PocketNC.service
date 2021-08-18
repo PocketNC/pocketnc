@@ -3,8 +3,8 @@ Description=PocketNC Service
 After=generic-board-startup.service
 
 [Service]
-ExecStart=/home/pocketnc/pocketnc/startPocketNC.sh
-ExecStop=/home/pocketnc/pocketnc/stopPocketNC.sh
+ExecStart=/opt/pocketnc/startPocketNC.sh
+ExecStop=/opt/pocketnc/stopPocketNC.sh
 User=pocketnc
 KillMode=process
 
