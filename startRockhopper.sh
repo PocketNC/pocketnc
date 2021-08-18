@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ -f ${POCKETNC_DIRECTORY}../.pocketnc_env ]; then
-  source ${POCKETNC_DIRECTORY}../.pocketnc_env
+if [ -f /home/pocketnc/.pocketnc_env ]; then
+  source /home/pocketnc/.pocketnc_env
 fi
 
 sleep 1

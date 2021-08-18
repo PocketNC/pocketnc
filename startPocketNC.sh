@@ -1,13 +1,13 @@
 #!/bin/bash
 
-sudo ${POCKETNC_DIRECTORY}ensureBootloaderUpToDate.sh
+sudo /opt/pocketnc/ensureBootloaderUpToDate.sh
 
-if [ -f ${POCKETNC_DIRECTORY}Settings/PocketNC.ini ];then
-  rm ${POCKETNC_DIRECTORY}Settings/PocketNC.ini
+if [ -f /opt/pocketnc/Settings/PocketNC.ini ];then
+  rm /opt/pocketnc/Settings/PocketNC.ini
 fi
 
-if [ -f ${POCKETNC_DIRECTORY}../.pocketnc_env ]; then
-  source ${POCKETNC_DIRECTORY}../.pocketnc_env
+if [ -f /home/pocketnc/.pocketnc_env ]; then
+  source /home/pocketnc/.pocketnc_env
 fi
 
 export PATH=$PATH:${POCKETNC_DIRECTORY}Settings
