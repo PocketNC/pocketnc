@@ -1,19 +1,22 @@
 #!/bin/bash
 
-sudo /opt/pocketnc/ensureBootloaderUpToDate.sh
-
-if [ -f /opt/pocketnc/Settings/PocketNC.ini ];then
-  rm /opt/pocketnc/Settings/PocketNC.ini
+if [ -f /opt/pocketnc/pocketnc_env ]; then
+  source /opt/pocketnc/pocketnc_env
 fi
-
 if [ -f /home/pocketnc/.pocketnc_env ]; then
   source /home/pocketnc/.pocketnc_env
 fi
 
-export PATH=$PATH:${POCKETNC_DIRECTORY}Settings
+sudo ${POCKETNC_DIRECTORY}/ensureBootloaderUpToDate.sh
 
-cd ${POCKETNC_DIRECTORY}Settings/
+if [ -f ${POCKETNC_VAR_DIRECTORY}/PocketNC.ini ];then
+  rm ${POCKETNC_VAR_DIRECTORY}/PocketNC.ini
+fi
+
+export PATH=$PATH:${POCKETNC_DIRECTORY}/Settings
+
+cd ${POCKETNC_DIRECTORY}/Settings/
 
 ./generateINI.py
 
-linuxcnc ${POCKETNC_DIRECTORY}Settings/PocketNC.ini
+linuxcnc ${POCKETNC_VAR_DIRECTORY}/PocketNC.ini
