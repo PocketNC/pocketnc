@@ -21,6 +21,9 @@ B_COMP_DEFAULT_FILE = os.path.join(POCKETNC_DIRECTORY, "Settings/b.comp.default"
 C_COMP_FILE = os.path.join(POCKETNC_VAR_DIRECTORY, "c.comp");
 C_COMP_DEFAULT_FILE = os.path.join(POCKETNC_DIRECTORY, "Settings/c.comp.default");
 
+if not os.path.isdir(POCKETNC_VAR_DIRECTORY):
+    subprocess.call(['sudo', 'mkdir', POCKETNC_VAR_DIRECTORY])
+
 if not os.path.isfile(A_COMP_FILE):
     shutil.copyfile(A_COMP_DEFAULT_FILE, A_COMP_FILE)
 
