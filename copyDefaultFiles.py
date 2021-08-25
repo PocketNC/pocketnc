@@ -9,6 +9,9 @@ POCKETNC_VAR_DIRECTORY = os.environ.get('POCKETNC_VAR_DIRECTORY')
 TOOL_TABLE_FILE = os.path.join(POCKETNC_VAR_DIRECTORY, "tool.tbl")
 TOOL_TABLE_DEFAULT_FILE = os.path.join(POCKETNC_DIRECTORY, "Settings/tool.tbl.default")
 
+POCKETNC_ENV_FILE = os.path.join(POCKETNC_DIRECTORY, "pocketnc_env")
+POCKETNC_ENV_DEFAULT_FILE = os.path.join(POCKETNC_DIRECTORY, "pocketnc_env.default")
+
 CLIENT_CONFIG_FILE = os.path.join(POCKETNC_VAR_DIRECTORY, "CLIENT_CONFIG.JSON")
 CLIENT_CONFIG_DEFAULT_FILE = os.path.join(POCKETNC_DIRECTORY, "Rockhopper/CLIENT_CONFIG.JSON.default")
 
@@ -20,6 +23,9 @@ B_COMP_DEFAULT_FILE = os.path.join(POCKETNC_DIRECTORY, "Settings/b.comp.default"
 
 C_COMP_FILE = os.path.join(POCKETNC_VAR_DIRECTORY, "c.comp");
 C_COMP_DEFAULT_FILE = os.path.join(POCKETNC_DIRECTORY, "Settings/c.comp.default");
+
+if not os.path.isfile(POCKETNC_ENV_FILE):
+    shutil.copyfile([POCKETNC_ENV_FILE, POCKETNC_ENV_DEFAULT_FILE])
 
 if not os.path.isdir(POCKETNC_VAR_DIRECTORY):
     subprocess.call(['sudo', 'mkdir', POCKETNC_VAR_DIRECTORY])
