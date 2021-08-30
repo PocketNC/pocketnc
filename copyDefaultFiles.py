@@ -25,7 +25,7 @@ C_COMP_FILE = os.path.join(POCKETNC_VAR_DIRECTORY, "c.comp");
 C_COMP_DEFAULT_FILE = os.path.join(POCKETNC_DIRECTORY, "Settings/c.comp.default");
 
 CALIBRATION_OVERLAY_FILE = os.path.join(POCKETNC_VAR_DIRECTORY, "CalibrationOverlay.inc")
-:x
+
 if not os.path.isfile(POCKETNC_ENV_FILE):
     shutil.copyfile([POCKETNC_ENV_FILE, POCKETNC_ENV_DEFAULT_FILE])
 
