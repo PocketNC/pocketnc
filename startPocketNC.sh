@@ -7,7 +7,9 @@ if [ -f /home/pocketnc/.pocketnc_env ]; then
   source /home/pocketnc/.pocketnc_env
 fi
 
-sudo ${POCKETNC_DIRECTORY}/ensureBootloaderUpToDate.sh
+if [ -f /var/pnc-first-boot ]; then
+  ${POCKETNC_DIRECTORY}/firstBoot.sh
+fi
 
 if [ ! -d ${POCKETNC_USB_DIRECTORY}/usb0 ]; then
   sudo mkdir -p ${POCKETNC_USB_DIRECTORY}/usb0
