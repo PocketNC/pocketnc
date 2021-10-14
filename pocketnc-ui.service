@@ -1,9 +1,0 @@
-[Unit]
-Description=Web interface to Rockhopper (which provides interface to linuxcnc) via web sockets
-After=Rockhopper.service
-
-[Service]
-ExecStart=/home/pocketnc/pocketnc/startpocketnc-ui.sh
-
-[Install]
-WantedBy=multi-user.target
