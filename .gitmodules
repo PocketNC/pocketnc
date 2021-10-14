@@ -1,6 +1,3 @@
-[submodule "pocketnc-ui"]
-	path = pocketnc-ui
-	url = https://github.com/PocketNC/pocketnc-ui.git
 [submodule "Rockhopper"]
 	path = Rockhopper
 	url = https://github.com/PocketNC/Rockhopper.git
