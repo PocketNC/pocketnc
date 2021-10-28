@@ -1,5 +1,4 @@
 source /opt/source/pocketnc/emcapplication/scripts/rip-environment
-export DEV=true
 export PATH=/opt/source/bb.org-overlays/tools/beaglebone-universal-io/:/opt/source/pocketnc/bin:/opt/source/pocketnc/python/bin:$PATH
 export POCKETNC_DIRECTORY=/opt/pocketnc
 export POCKETNC_VAR_DIRECTORY=/var/opt/pocketnc
