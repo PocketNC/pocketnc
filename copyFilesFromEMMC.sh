@@ -27,4 +27,23 @@ if [ -b /dev/mmcblk1p1 ]; then
   if [ -d /mnt/home/pocketnc/ncfiles ]; then
     cp -r /mnt/home/pocketnc/ncfiles/* /home/pocketnc/ncfiles/
   fi
+
+  sudo umount /mnt
+fi
+
+if [ -b /dev/mmcblk1p2 ]; then
+  sudo mount /dev/mmcblk1p2 /mnt
+
+  if [ -f /mnt/home/pocketnc/linuxcnc/configs/ARM.BeagleBone.PocketNC/PocketNC.ini ]; then
+    python3 ${POCKETNC_DIRECTORY}/Rockhopper/convertV1INIFileToOverlay.py \
+            /mnt/home/pocketnc/linuxcnc/configs/ARM.BeagleBone.PocketNC/PocketNC.ini \
+            ${POCKETNC_DIRECTORY}/Settings/versions/v1revH/PocketNC.ini \
+            ${POCKETNC_VAR_DIRECTORY}/CalibrationOverlay.inc
+    echo v1revH > ${POCKETNC_VAR_DIRECTORY}/version
+  fi
+
+  if [ -d /mnt/home/pocketnc/linuxcnc/nc_files ]; then
+    cp -r /mnt/home/pocketnc/linuxcnc/nc_files/*.ngc /home/pocketnc/ncfiles/
+  fi
+  sudo umount /mnt
 fi
