@@ -40,6 +40,8 @@ if [ -f ${POCKETNC_VAR_DIRECTORY}/PocketNC.ini ];then
   rm ${POCKETNC_VAR_DIRECTORY}/PocketNC.ini
 fi
 
+sudo sed -i 's/5220.*/5220\t2.000000/' /var/opt/pocketnc/pru-stepper.var
+
 export PATH=$PATH:${POCKETNC_DIRECTORY}/Settings
 
 cd ${POCKETNC_DIRECTORY}/Settings/
