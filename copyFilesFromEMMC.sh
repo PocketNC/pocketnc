@@ -25,6 +25,10 @@ if [ -b /dev/mmcblk1p1 ]; then
     cp /mnt/home/pocketnc/pocketnc/Settings/tool.tbl ${POCKETNC_VAR_DIRECTORY}/tool.tbl
   fi
 
+  if [ -f /mnt/home/pocketnc/pocketnc/Settings/version ]; then
+    cp /mnt/home/pocketnc/pocketnc/Settings/version ${POCKETNC_VAR_DIRECTORY}/version
+  fi
+
   if [ -d /mnt/home/pocketnc/ncfiles ]; then
     cp -r /mnt/home/pocketnc/ncfiles/* /home/pocketnc/ncfiles/
   fi
