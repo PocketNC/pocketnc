@@ -4,3 +4,4 @@ export POCKETNC_DIRECTORY=/opt/pocketnc
 export POCKETNC_VAR_DIRECTORY=/var/opt/pocketnc
 export POCKETNC_USB_DIRECTORY=/run/media
 export PYTHONPATH=/opt/source/pocketnc/python:${POCKETNC_DIRECTORY}/Settings:${POCKETNC_DIRECTORY}/Rockhopper:$PYTHONPATH
+export USER_MESSAGES_END_POINT=ipc:///var/opt/pocketnc/messagesSocket
