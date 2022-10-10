@@ -16,4 +16,11 @@ until [ -n "$dummy_pid" ]; do
   sleep 1
 done
 
+ini_pin_data=""
+while [ -z "$ini_pin_data" ]; do
+  echo "Waiting for ini pin before starting LinuxCNCWebSktSvr..."
+  ini_pin_data=$(halcmd show pin ini | grep ini -m 1)
+  sleep 5
+done
+
 linuxcnc-python ${POCKETNC_DIRECTORY}/Rockhopper/LinuxCNCWebSktSvr.py ${POCKETNC_VAR_DIRECTORY}/PocketNC.ini
