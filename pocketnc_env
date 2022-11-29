@@ -3,5 +3,5 @@ export PATH=/opt/source/bb.org-overlays/tools/beaglebone-universal-io/:/opt/sour
 export POCKETNC_DIRECTORY=/opt/pocketnc
 export POCKETNC_VAR_DIRECTORY=/var/opt/pocketnc
 export POCKETNC_USB_DIRECTORY=/run/media
-export PYTHONPATH=/opt/source/pocketnc/python:${POCKETNC_DIRECTORY}/Settings:${POCKETNC_DIRECTORY}/Rockhopper:$PYTHONPATH
+export PYTHONPATH=/opt/ippclient:/opt/cmm-calib:/opt/source/pocketnc/python:${POCKETNC_DIRECTORY}/Settings:${POCKETNC_DIRECTORY}/Rockhopper:$PYTHONPATH
 export USER_MESSAGES_END_POINT=ipc:///var/opt/pocketnc/messagesSocket
