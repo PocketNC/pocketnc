@@ -36,6 +36,10 @@ if [ ! -d ${POCKETNC_USB_DIRECTORY}/usb7 ]; then
   sudo mkdir -p ${POCKETNC_USB_DIRECTORY}/usb7
 fi
 
+if [ ! -d ${POCKETNC_VAR_DIRECTORY}/calib ]; then
+  mkdir -p ${POCKETNC_VAR_DIRECTORY}/calib
+fi
+
 if [ -f ${POCKETNC_VAR_DIRECTORY}/PocketNC.ini ];then
   rm ${POCKETNC_VAR_DIRECTORY}/PocketNC.ini
 fi
