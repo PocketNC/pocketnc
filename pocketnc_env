@@ -4,5 +4,5 @@ export POCKETNC_DIRECTORY=/opt/pocketnc
 export POCKETNC_VAR_DIRECTORY=/var/opt/pocketnc
 export CALIB_GCODE_DIRECTORY=/opt/cmm-calib-gcode
 export POCKETNC_USB_DIRECTORY=/run/media
-export PYTHONPATH=/opt/ippclient:/opt/cmm-calib:/opt/source/pocketnc/python:${POCKETNC_DIRECTORY}/Settings:${POCKETNC_DIRECTORY}/Settings/features/solo_door:${POCKETNC_DIRECTORY}/Rockhopper:$PYTHONPATH
+export PYTHONPATH=/opt/ippclient:/opt/cmm-calib:/opt/source/pocketnc/python:${POCKETNC_DIRECTORY}/Settings:${POCKETNC_DIRECTORY}/Settings/features/solo_door:${POCKETNC_DIRECTORY}/Settings/features/beta_solo_door:${POCKETNC_DIRECTORY}/Rockhopper:$PYTHONPATH
 export USER_MESSAGES_END_POINT=ipc:///var/opt/pocketnc/messagesSocket
